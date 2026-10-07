@@ -516,7 +516,8 @@ ${historyText}`
 
   const diaryResult = extractDiaryFromResponse(rawAiText);
   const diarySaved = appendDiaryEntry(diaryResult.diaryContent);
-  const aiText = diaryResult.remainingText;
+  let aiText = diaryResult.remainingText;
+  aiText = aiText.replace(​/<thinking>[\s\S]*?<\/th​inking>/gi, '').trim();
 
   let eventContent;
 
