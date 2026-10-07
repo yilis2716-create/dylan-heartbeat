@@ -509,7 +509,8 @@ ${historyText}`
     throw new Error(`模型请求失败（HTTP ${response.status}）：${responseText.slice(0, 300)}`);
   }
 
-  const rawAiText = normalizeContentToText(data.choices?.[0]?.message?.content).trim();
+  let rawAiText = normalizeContentToText(data.choices?.[0]?.message?.content).trim();
+  rawAiText = rawAiText.replace(/<thinking>[\s\S]*?<\/thinking>/gi, '').trim();
   console.log("\nWake Result Summary:\n");
   console.log(JSON.stringify({ choices: Array.isArray(data.choices) ? data.choices.length : 0, ai_text_chars: rawAiText.length }));
 
