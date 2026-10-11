@@ -550,7 +550,9 @@ ${historyText}`
       barkText = barkText.replace(/^\[BARK\]\s*/, "").trim();
       barkText = barkText.replace(/\s*\[\/BARK\]$/, "").trim();
     }
-
+    // 清洗 tool_call / tool_response 原始标签
+    barkText = barkText.replace(/<tool_call>[\s\S]*?<\/tool_call>/gi, "").trim();
+    barkText = barkText.replace(/<tool_response>[\s\S]*?<\/tool_response>/gi, "").trim();
     // 清洗“标题：”、“正文：”前缀（如果有）
     barkText = barkText
       .replace(/^标题[：:]\s*/gm, "")
